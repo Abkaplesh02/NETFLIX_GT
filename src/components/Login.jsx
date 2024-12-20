@@ -2,9 +2,11 @@ import { useRef, useState } from "react"
 import { BG_URL } from "../utils/constants"
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../redux/userSlice";
 
 const Login=()=>{
     const [isSignInForm,setIsSignInForm]=useState(true);
@@ -13,6 +15,7 @@ const Login=()=>{
     const password=useRef();
     const [errorMessage,setErrorMessage]=useState(null);
     const navigate=useNavigate();
+    const dispatch=useDispatch();
 
     const toggleSignInForm=()=>{
         setIsSignInForm(!isSignInForm);
@@ -33,6 +36,23 @@ const Login=()=>{
   .then((userCredential) => {
     // Signed up 
     const user = userCredential.user;
+
+    updateProfile(auth.currentUser, {
+        displayName: name.current.value, photoURL:"https://lh3.googleusercontent.com/ogw/AF2bZygS19Vnb1PQ0rOPC3BWIbJzy8-8EgCWbEsy6RoQeaoQgw=s32-c-mo"
+      }).then(() => {
+        // Profile updated!
+        // ...
+        const {uid,displayName,email,photoURL} = user;
+        dispatch(addUser({ uid:uid,displayName:displayName,email:email,photoURL:photoURL}));
+      }).catch((error) => {
+        // An error occurred
+        // ...
+      });
+      
+
+
+
+
     console.log(user)
     navigate("/browse");
     

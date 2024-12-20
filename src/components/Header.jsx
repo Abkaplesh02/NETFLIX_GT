@@ -21,7 +21,7 @@ const Header=()=>{
             <img className="w-44" src={LOGO} alt="Logo" />
 
             {store && <div className="flex p-2">
-                <img className="w-12 h-12 rounded-full" src="https://lh3.googleusercontent.com/ogw/AF2bZygS19Vnb1PQ0rOPC3BWIbJzy8-8EgCWbEsy6RoQeaoQgw=s32-c-mo" alt="userIcon" />
+                <img className="w-12 h-12 rounded-full" src={store?.photoURL} alt="userIcon" />
                 <button className=" text-white font-bold" onClick={handleSignOut}>(Sign Out)</button>
             </div>}
         </div>

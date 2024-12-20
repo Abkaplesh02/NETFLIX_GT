@@ -29,7 +29,6 @@ const Body=()=>{
               const {uid,displayName,email,photoURL} = user;
               dispatch(addUser({uid:uid,displayName:displayName,email:email,photoURL:photoURL}));
 
-              console.log(uid);
               // ...
             } else {
               // User is signed out
