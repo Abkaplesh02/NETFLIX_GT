@@ -19,3 +19,4 @@ No
 No
 firebase run build
 firebase deploy
+Run Project
